@@ -53,6 +53,7 @@ func validateMovie(in *store.MovieInput)(string,string){
  if in.OriginalTitle==""{in.OriginalTitle=in.Title}
  if in.OriginalLanguage==""{in.OriginalLanguage="en"}
  if len(in.OriginalLanguage)!=2{return "BAD_LANGUAGE","รหัสภาษาต้องยาว 2 ตัวอักษร"}
+ if in.PosterPath!=nil && len(*in.PosterPath)>500{return "BAD_POSTER","ที่อยู่รูปโปสเตอร์ต้องยาวไม่เกิน 500 ตัวอักษร"}
  if in.PosterPath!=nil && !strings.HasPrefix(*in.PosterPath,"/")&&!strings.HasPrefix(*in.PosterPath,"https://")&&!strings.HasPrefix(*in.PosterPath,"http://"){
   return "BAD_POSTER","โปสเตอร์ต้องเป็น TMDB path หรือ http(s) URL"
  }
