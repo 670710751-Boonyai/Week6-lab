@@ -54,3 +54,13 @@ func(h *Handler) RemoveWishlist(w http.ResponseWriter,r *http.Request){
  if err:=h.Store.RemoveWishlist(r.Context(),memberID(r),id);err!=nil{internal(w,err);return}
  w.WriteHeader(204)
 }
+
+func(h *Handler) MyMovieState(w http.ResponseWriter,r *http.Request){
+ id,ok:=pathID(r,"id");if !ok{writeError(w,400,"BAD_ID","เลขหนังไม่ถูกต้อง");return}
+ member:=memberID(r)
+ score,err:=h.Store.GetMemberVote(r.Context(),member,id)
+ if err!=nil{internal(w,err);return}
+ inWishlist,err:=h.Store.InWishlist(r.Context(),member,id)
+ if err!=nil{internal(w,err);return}
+ writeJSON(w,200,map[string]any{"vote":score,"inWishlist":inWishlist})
+}
