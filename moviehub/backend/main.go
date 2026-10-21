@@ -29,6 +29,7 @@ func main() {
  if err=pool.Ping(ctx);err!=nil { log.Fatal(err) }
 
  mux:=http.NewServeMux()
+ registerRoutes(mux,pool)
  mux.HandleFunc("GET /health",func(w http.ResponseWriter,r *http.Request) {
   w.Header().Set("Content-Type","application/json")
   json.NewEncoder(w).Encode(map[string]string{"status":"ok"})
