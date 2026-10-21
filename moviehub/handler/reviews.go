@@ -8,7 +8,6 @@ import(
  "unicode/utf8"
  "github.com/jackc/pgx/v5/pgconn"
  "moviehub/mw"
- "moviehub/store"
 )
 func memberID(r *http.Request)int64{id,_:=mw.MemberID(r.Context());return id}
 func badReference(w http.ResponseWriter,err error)bool{
