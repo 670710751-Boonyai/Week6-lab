@@ -18,7 +18,6 @@ func CORS(origins []string,next http.Handler)http.Handler{
   if r.Method==http.MethodOptions {
    w.Header().Add("Vary","Access-Control-Request-Method")
    w.Header().Add("Vary","Access-Control-Request-Headers")
-   if origin!=""&&!allowed[origin]{w.WriteHeader(http.StatusForbidden);return}
    w.WriteHeader(http.StatusNoContent);return
   }
   next.ServeHTTP(w,r)
