@@ -24,7 +24,7 @@ CREATE TABLE movies (
     original_language  CHAR(2)       NOT NULL,      -- ISO 639-1 เช่น en, th, ja
     overview           TEXT,                        -- เรื่องย่อ (ยาวได้หลายร้อยตัวอักษร)
     overview_th        TEXT,
-    poster_path        VARCHAR(100),                -- เก็บแค่ path เช่น /abc.jpg  ประกอบ URL ตอนตอบ API
+    poster_path        VARCHAR(500),                -- เก็บแค่ path เช่น /abc.jpg  ประกอบ URL ตอนตอบ API
     backdrop_path      VARCHAR(100),
     release_date       DATE,                        -- บางเรื่อง TMDB ส่ง "" มา ให้เก็บเป็น NULL
     vote_average       NUMERIC(5,3)  NOT NULL DEFAULT 0 CHECK (vote_average BETWEEN 0 AND 10),
