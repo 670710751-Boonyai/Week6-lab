@@ -96,7 +96,7 @@ func(s *Store) CreateMovie(ctx context.Context,id int64,in MovieInput)(AdminMovi
  tx,err:=s.Pool.Begin(ctx);if err!=nil{return AdminMovie{},err};defer tx.Rollback(ctx)
  if id==0 {
   if _,err=tx.Exec(ctx,`SELECT pg_advisory_xact_lock(802412)`);err!=nil{return AdminMovie{},err}
-  err=tx.QueryRow(ctx,`SELECT COALESCE(MAX(id),0)+1 FROM movies`).Scan(&id)
+  err=tx.QueryRow(ctx,`SELECT GREATEST(COALESCE(MAX(id),0)+1,9000000) FROM movies`).Scan(&id)
   if err!=nil{return AdminMovie{},err}
  }
  _,err=tx.Exec(ctx,`INSERT INTO movies(id,title,title_th,original_title,original_language,overview,overview_th,poster_path,release_date)
