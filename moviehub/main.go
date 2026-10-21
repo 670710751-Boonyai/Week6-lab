@@ -34,6 +34,7 @@ func main(){
  mux.HandleFunc("GET /api/movies/{id}/reviews",h.ListReviews)
  mux.HandleFunc("POST /api/movies/{id}/reviews",login(h.PostReview))
  mux.HandleFunc("PUT /api/movies/{id}/vote",login(h.PutVote))
+ mux.HandleFunc("GET /api/movies/{id}/my-state",login(h.MyMovieState))
  mux.HandleFunc("GET /api/me/wishlist",login(h.Wishlist))
  mux.HandleFunc("PUT /api/me/wishlist/{id}",login(h.AddWishlist))
  mux.HandleFunc("DELETE /api/me/wishlist/{id}",login(h.RemoveWishlist))
