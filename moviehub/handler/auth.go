@@ -9,6 +9,7 @@ import (
 
     "moviehub/auth"
     "moviehub/store"
+    "moviehub/mw"
 )
 
 type registerReq struct {
@@ -88,4 +89,12 @@ func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	writeJSON(w, http.StatusOK, map[string]any{"token": token, "member": m})
+}
+// Me returns the currently authenticated account using the member ID from JWT.
+func (h *Handler) Me(w http.ResponseWriter,r *http.Request){
+ id,ok:=mw.MemberID(r.Context());if !ok{writeError(w,401,"NO_TOKEN","กรุณาเข้าสู่ระบบก่อน");return}
+ m,err:=h.Store.MemberByID(r.Context(),id)
+ if errors.Is(err,store.ErrNotFound){writeError(w,401,"BAD_TOKEN","ไม่พบสมาชิก");return}
+ if err!=nil{internal(w,err);return}
+ writeJSON(w,200,m)
 }
