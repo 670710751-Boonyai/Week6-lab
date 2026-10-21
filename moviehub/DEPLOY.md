@@ -2,14 +2,14 @@
 
 ## Repository locations
 - **Go API:** `Week6-lab/moviehub/` (NOT the older `kitchen/` lab)
-- **React:** `Moviehub-670710751/` on branch `week11-12-development`
+- **React:** `Moviehub-670710751/` on branch `main`
 
 ## Supabase (requires your own account)
 1. Create a PostgreSQL project.
 2. In SQL Editor, execute `schema.sql` **once** (creates 8 tables and genres).
-3. Execute `seed.sql` to load the movie records.
-4. Execute `rls.sql` to enable RLS on all eight tables.
-5. Copy the **session-pooler** PostgreSQL URI (port 5432); ensure `sslmode=require`. Do not put this URI in React, GitHub, screenshots or chat.
+3. If you created the tables before 2026-10-21, run `migrations/20261021_poster_path_500.sql` to allow poster URLs of up to 500 characters. Do **not** rerun schema.sql on an existing database.\n4. Execute `seed.sql` to load the movie records.
+5. Execute `rls.sql` to enable RLS on all eight tables.
+6. Copy the **session-pooler** PostgreSQL URI (port 5432); ensure `sslmode=require`. Do not put this URI in React, GitHub, screenshots or chat.
 
 ## Render Go Web Service
 - Repo: `670710751-Boonyai/Week6-lab`
@@ -46,4 +46,4 @@ Log out and log back in to get a new JWT carrying the admin role.
 - Never commit `.jwt_secret`, `.env` or `DATABASE_URL`.
 
 ## Limitations
-The repository is ready for code review, but end-to-end tests require a running Supabase database and the deployed services. GitHub Actions build checks are provided; green checks should be verified before hand-in.
+Build and unit checks verify code; end-to-end tests require a running Supabase database and the deployed services. GitHub Actions build checks are provided; green checks should be verified before hand-in.
